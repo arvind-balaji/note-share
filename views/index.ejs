@@ -47,16 +47,16 @@
         <div class="row">
             <div class="col-xs-12 col-md-3 push-md-9 bd-sidebar">
                 <div class="sidebar-nav-fixed affix">
-                    <form class="bd-search">
+                    <form class="bd-search disabled">
                         <input type="text" class="form-control" id="search-input" placeholder="Search..." autocomplete="off">
                         <div class="dropdown-menu bd-search-results" id="search-results"></div>
                     </form>
                     <br/>
                     <div class="hidden-sm-down">
-                    <h3>Sidebar</h3>
-                    <p>Hella cool side bar content that I don't have time to write.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                </div>
+                        <h3>Sidebar</h3>
+                        <p>Hella cool side bar content that I don't have time to write.</p>
+                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12 col-md-9 pull-md-3 bd-content">
@@ -76,49 +76,19 @@
                 </ul>
                 <br/>
 
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Answers for [some class] test</h4>
-                        <p class="card-text"></p>
-                        <p class="card-text"><small class="text-muted">30 minutes ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Study this to get an A</h4>
-                        <p class="card-text">Insert generic list here</p>
-                        <p class="card-text"><small class="text-muted">1 hour ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">Generic titles...</h4>
-                        <p class="card-text"></p>
-                        <p class="card-text"><small class="text-muted">1 hour ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">More generic titles...</h4>
-                        <p class="card-text">even more generic content</p>
-                        <p class="card-text"><small class="text-muted">1 hour ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title">More generic titles...</h4>
-                        <p class="card-text">even more generic content</p>
-                        <p class="card-text"><small class="text-muted">1 hour ago</small></p>
-                    </div>
-                </div>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                <% posts.forEach(function(el, index) {
+                    data = posts[index];%>
+                    <%include partials/post%>
+                <%}); %>
+
+                <p><a class="btn btn-secondary" href="#" role="button">Load More</a></p>
             </div>
         </div>
 
         <hr>
 
         <footer>
-            <p>&copy; Company 2016</p>
+            <p>&copy; [Redacted] 2016</p>
         </footer>
     </div>
     <!-- /container -->
@@ -129,6 +99,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    <script src="javascripts/index.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
 </body>
 

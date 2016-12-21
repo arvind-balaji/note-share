@@ -4,9 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var Datastore = require('nedb');
 
 var app = express();
 
@@ -24,6 +24,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+// db.findOne({ _id: 1 }, function (err, doc) {
+//   doc = doc || { _id: 1, counter: 0 };
+//
+//   console.log('This example was executed ' + doc.counter + ' times. Last access time was ' + doc.lastSeetAt);
+//
+//   doc.lastSeetAt = new Date();
+//   doc.counter++;
+//
+//   db.update({ _id: 1 }, doc, { upsert: true }, function (err, num) {
+//     console.log('Updated ' + num + ' records');
+//   });
+// });
+
+// post.count = i;
+//db.insert(post);
+// db.find({}, function (err, doc) {
+//     console.log(doc);
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
