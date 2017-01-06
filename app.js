@@ -50,7 +50,7 @@ app.post('/api/newPost', function (req, res) {
 
 	console.log(post);
     db.insert(post);
-	res.status(200).end();
+    res.redirect('/');
 });
 
 // catch 404 and forward to error handler
