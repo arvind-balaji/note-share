@@ -38,7 +38,7 @@
         <div class="container">
             <h1 class="display-3 text-white">Note Share</h1>
             <p class="lead text-white hidden-sm-down">The collaborative notes project</p>
-            <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Contribute</a></p> -->
+            <p><a class="btn btn-outline-secondary btn-lg" href="#" role="button" data-toggle="modal" data-target="#postModal">Contribute</a></p>
         </div>
     </div>
 
@@ -47,8 +47,8 @@
         <div class="row">
             <div class="col-xs-12 col-md-3 push-md-9 bd-sidebar">
                 <div class="sidebar-nav-fixed affix">
-                    <form class="bd-search disabled">
-                        <input type="text" class="form-control" id="search-input" placeholder="Search..." autocomplete="off">
+                    <form class="bd-search">
+                        <input type="text" class="form-control" disabled id="search-input" placeholder="Search..." autocomplete="off">
                         <div class="dropdown-menu bd-search-results" id="search-results"></div>
                     </form>
                     <br/>
@@ -65,13 +65,10 @@
                         <a class="nav-link active" href="#">New</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Popular</a>
+                        <a class="nav-link disabled" href="#">Popular</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Recomended</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Custom</a>
+                        <a class="nav-link disabled" href="#">Hot</a>
                     </li>
                 </ul>
                 <br/>
@@ -79,12 +76,41 @@
                 <% posts.forEach(function(el, index) {
                     data = posts[index];%>
                     <%include partials/post%>
-                <%}); %>
+                        <%}); %>
 
-                <p><a class="btn btn-secondary" href="#" role="button">Load More</a></p>
+                            <p><a class="btn btn-secondary" href="#" role="button">Load More</a></p>
             </div>
         </div>
 
+        <!-- New Post Modal -->
+        <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="api/newPost" method="post">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">New Post</h4>
+                        </div>
+                        <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="form-control-label">Title:</label>
+                                    <input type="text" class="form-control" name="title" id="title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="form-control-label">Post:</label>
+                                    <textarea class="form-control" name="text" id="text"></textarea>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <hr>
 
         <footer>

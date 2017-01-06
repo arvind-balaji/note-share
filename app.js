@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var Datastore = require('nedb');
+db = new Datastore({ filename: 'db.json', autoload: true });
 
 var app = express();
 
@@ -43,6 +44,14 @@ app.use('/users', users);
 // db.find({}, function (err, doc) {
 //     console.log(doc);
 // });
+//write settings recieved from client to settings.json
+app.post('/api/newPost', function (req, res) {
+    var post = {"title":req.body.title,"caption":req.body.text,"time": + new Date()}
+
+	console.log(post);
+    db.insert(post);
+	res.status(200).end();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

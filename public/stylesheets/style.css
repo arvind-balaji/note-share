@@ -2,3 +2,8 @@
     background-color: #563d7c;
     border-radius: 0;
 }
+
+.btn-outline-secondary{
+    color: white;
+    border-color: white;
+}
