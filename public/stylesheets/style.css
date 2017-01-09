@@ -7,3 +7,9 @@
     color: white;
     border-color: white;
 }
+
+.form-pill{
+    width: 49%;
+    text-align: center;
+    padding-bottom: 20px;
+}
