@@ -78,14 +78,10 @@
 
                 <% posts.forEach(function(el, index) {
                     data = posts[index];%>
-                    <%if (data.type == "link") { %>
-                        <%include partials/linkPost%>
-                    <% }else{ %>
-                        <%include partials/textPost%>
-                    <% } %>
-                <%}); %>
+                    <%include partials/post%>
+                        <%}); %>
 
-                <p><a class="btn btn-secondary" href="#" role="button">Load More</a></p>
+                            <p><a class="btn btn-secondary" href="#" role="button">Load More</a></p>
             </div>
         </div>
 
@@ -93,7 +89,7 @@
         <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form id="newPost" action="api/newPost" method="post" data-parsley-validate="">
+                    <form action="api/newPost" method="post">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -101,36 +97,14 @@
                             <h4 class="modal-title" id="myModalLabel">New Post</h4>
                         </div>
                         <div class="modal-body">
-                            <ul class="nav nav-pills" id="myTab" role="tablist">
-                                <li class="nav-item form-pill">
-                                    <a class="nav-link active" id="text-tab" data-toggle="tab" href="#text" role="tab" aria-controls="home" aria-expanded="true">Text</a>
-                                </li>
-                                <li class="nav-item form-pill">
-                                    <a class="nav-link" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="profile" aria-expanded="false">Link</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div role="tabpanel" class="tab-pane active show" id="text" aria-labelledby="text-tab" aria-expanded="true">
-                                    <div class="form-group">
-                                        <label for="textTitle" class="form-control-label" required="">Title</label>
-                                        <input type="text" class="form-control" name="textTitle" id="textTitle">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="textPost" class="form-control-label">Post</label>
-                                        <textarea class="form-control" name="textPost" id="textPost"></textarea>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="form-control-label">Title:</label>
+                                    <input type="text" class="form-control" name="title" id="title">
                                 </div>
-                                <div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab" aria-expanded="false">
-                                    <div class="form-group">
-                                        <label for="linkTitle" class="form-control-label">Title</label>
-                                        <input type="text" class="form-control" name="linkTitle" id="linkTitle">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="linkPost" class="form-control-label">Link</label>
-                                        <input class="form-control" name="linkPost" id="linkPost"></input>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="form-control-label">Post:</label>
+                                    <textarea class="form-control" name="text" id="text"></textarea>
                                 </div>
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -154,8 +128,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.js"></script>
-    <script src="javascripts/index.js"></script>
+    <script src="javascripts/index.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
 </body>
 

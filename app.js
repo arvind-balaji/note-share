@@ -46,10 +46,11 @@ app.use('/users', users);
 // });
 //write settings recieved from client to settings.json
 app.post('/api/newPost', function (req, res) {
-    var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
-	//console.log(post);
+    var post = {"title":req.body.title,"caption":req.body.text,"time": + new Date()}
+
+	console.log(post);
     db.insert(post);
-    res.status(204).end();
+    res.redirect('/');
 });
 
 // catch 404 and forward to error handler
