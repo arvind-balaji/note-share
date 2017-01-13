@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
     //var count = req.param('count');
     db = new Datastore({ filename: 'db.json', autoload: true });
     db.find().sort({time:-1}).exec(function (err, posts) {
-        console.log(posts);
+        //console.log(posts);
         res.render('index', {posts : posts});
     });
 });
