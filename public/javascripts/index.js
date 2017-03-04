@@ -27,14 +27,3 @@ $("#newPost").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
     location.reload();
 });
-// $(function () {
-//   $('#newPost').parsley().on('field:validated', function() {
-//     var ok = $('.parsley-error').length === 0;
-//     $('.bs-callout-info').toggleClass('hidden', !ok);
-//     $('.bs-callout-warning').toggleClass('hidden', ok);
-//   })
-//   .on('form:submit', function() {
-//     alert("invalid");
-//     return false; // Don't submit form for this demo
-//   });
-// });

@@ -163,3 +163,26 @@
 </body>
 
 </html>
+
+<!-- Miscellaneous helper functions.  -->
+<%
+function getTimeDiff(time) {
+	var diff = (new Date()).getTime() - time.getTime();
+	return getTimeDiffDescription(diff, 'day', 86400000) ||
+		getTimeDiffDescription(diff, 'hour', 3600000) ||
+		getTimeDiffDescription(diff, 'minute', 60000) ||
+		getTimeDiffDescription(diff, 'second', 1000) ||
+		'just now';
+}
+
+function getTimeDiffDescription(diff, unit, divisor) {
+	var unitAmount = (diff / divisor).toFixed(0);
+	if (unitAmount > 0) {
+		return unitAmount + ' ' + unit + (unitAmount == 1 ? '' : 's') + ' ago';
+	} else if (unitAmount < 0) {
+		return 'in ' + Math.abs(unitAmount) + ' ' + unit + (unitAmount == -1 ? '' : 's');
+	} else {
+		return null;
+	}
+}
+%>

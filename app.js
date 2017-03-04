@@ -8,8 +8,14 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var Datastore = require('nedb');
 db = new Datastore({ filename: 'db.json', autoload: true });
+var auth = require('http-auth');
+var basic = auth.basic({
+    realm: "Simon Area.",
+    file: __dirname + "/users.htpasswd"
+});
 
 var app = express();
+app.use(auth.connect(basic));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,25 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-// db.findOne({ _id: 1 }, function (err, doc) {
-//   doc = doc || { _id: 1, counter: 0 };
-//
-//   console.log('This example was executed ' + doc.counter + ' times. Last access time was ' + doc.lastSeetAt);
-//
-//   doc.lastSeetAt = new Date();
-//   doc.counter++;
-//
-//   db.update({ _id: 1 }, doc, { upsert: true }, function (err, num) {
-//     console.log('Updated ' + num + ' records');
-//   });
-// });
-
-// post.count = i;
-//db.insert(post);
-// db.find({}, function (err, doc) {
-//     console.log(doc);
-// });
-//write settings recieved from client to settings.json
+//save new post to database
 app.post('/api/newPost', function (req, res) {
     var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
 	//console.log(post);
