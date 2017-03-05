@@ -18,21 +18,6 @@
 
 <body>
 
-    <!-- <nav class="navbar navbar-static-top navbar-dark bg-inverse">
-      <a class="navbar-brand" href="#">Project name</a>
-      <ul class="nav navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
-      </ul>
-    </nav> -->
-
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">
@@ -43,8 +28,8 @@
     </div>
 
     <div class="container">
-        <div class="alert alert-warning" role="alert">
-            <strong>Warning!</strong> This is a beta. Use it for testing purposes only, posts may be purged at any time.
+        <div class="alert alert-warning" role="warning">
+            <strong>Read Before Posting!</strong> Do not share answers here. Posting questions is allowed but directly sharing answers is not. Please use <a class="notice-link" href="http://pastebin.com">pastebin</a> for longer text posts.
         </div>
         <!-- Example row of columns -->
         <div class="row">
@@ -102,7 +87,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="alert alert-danger" role="alert">
-                                <strong>Attention!</strong> Answers are NOT allowed. Posts that attempt to share answers will be promptly deleted and reported. Old posts have been edited accordingly.
+                                <strong>Attention!</strong> Answers are NOT allowed. Posts that attempt to share answers will be deleted. Old posts have been edited accordingly.
                             </div>
                             <ul class="nav nav-pills" id="myTab" role="tablist">
                                 <li class="nav-item form-pill">
@@ -126,7 +111,7 @@
                                 <div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab" aria-expanded="false">
                                     <div class="form-group">
                                         <label for="linkTitle" class="form-control-label">Title</label>
-                                        <input type="text" class="form-control" name="linkTitle" id="linkTitle">
+                                        <input type="text" class="form-control" name="linkTitle" required id="linkTitle">
                                     </div>
                                     <div class="form-group">
                                         <label for="linkPost" class="form-control-label">Link</label>
@@ -164,25 +149,43 @@
 
 </html>
 
-<!-- Miscellaneous helper functions.  -->
+<!-- Miscellaneous helper functions -->
 <%
-function getTimeDiff(time) {
-	var diff = (new Date()).getTime() - time.getTime();
-	return getTimeDiffDescription(diff, 'day', 86400000) ||
-		getTimeDiffDescription(diff, 'hour', 3600000) ||
-		getTimeDiffDescription(diff, 'minute', 60000) ||
-		getTimeDiffDescription(diff, 'second', 1000) ||
-		'just now';
-}
-
-function getTimeDiffDescription(diff, unit, divisor) {
-	var unitAmount = (diff / divisor).toFixed(0);
-	if (unitAmount > 0) {
-		return unitAmount + ' ' + unit + (unitAmount == 1 ? '' : 's') + ' ago';
-	} else if (unitAmount < 0) {
-		return 'in ' + Math.abs(unitAmount) + ' ' + unit + (unitAmount == -1 ? '' : 's');
-	} else {
-		return null;
-	}
-}
+function getTimeDiff (date) {
+    if (typeof date !== 'object') {
+        date = new Date(date);
+    }
+    var seconds = Math.floor((new Date() - date) / 1000);
+    var intervalType;
+    var interval = Math.floor(seconds / 31536000);
+    if (interval >= 1) {
+        intervalType = 'year';
+    } else {
+        interval = Math.floor(seconds / 2592000);
+        if (interval >= 1) {
+            intervalType = 'month';
+        } else {
+            interval = Math.floor(seconds / 86400);
+            if (interval >= 1) {
+                intervalType = 'day';
+            } else {
+                interval = Math.floor(seconds / 3600);
+                if (interval >= 1) {
+                    intervalType = "hour";
+                } else {
+                    interval = Math.floor(seconds / 60);
+                    if (interval >= 1) {
+                        intervalType = "minute";
+                    } else {
+                        return "just now"
+                    }
+                }
+            }
+        }
+    }
+    if (interval > 1 || interval === 0) {
+        intervalType += 's';
+    }
+    return interval + ' ' + intervalType + ' ago';
+};
 %>

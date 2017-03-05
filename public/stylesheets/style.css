@@ -8,6 +8,10 @@
     border-color: white;
 }
 
+.btn-outline-secondary:focus {
+    background-color: rgba(0, 0, 0, 0);
+}
+
 .form-pill{
     width: 49%;
     text-align: center;

@@ -15,6 +15,8 @@ var basic = auth.basic({
 });
 
 var app = express();
+
+//Comment out to disable .htpasswd authentication.
 app.use(auth.connect(basic));
 
 // view engine setup
@@ -32,11 +34,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+//basic validation for blank posts - to be improved/rewritten
+function validatePost(post){
+    if(!post.title.trim()){
+        return false;
+    }
+    if (post.type == "link"){
+        if(!post.post.trim()){
+            return false;
+        }
+    }
+    return true;
+}
 //save new post to database
 app.post('/api/newPost', function (req, res) {
     var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
 	//console.log(post);
-    db.insert(post);
+    if(validatePost(post)){db.insert(post)};
     res.status(204).end();
 });
 
