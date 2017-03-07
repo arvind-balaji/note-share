@@ -50,7 +50,7 @@ $('#selectAll').click(function() {
 $('#selectTime').click(function() {
     for (toggle of $('.delete-btn')) {
         var time = $(toggle).parent().nextAll(1).children().text();
-        if(time.includes("just now")||time.includes("minutes")){
+        if(time.includes("just now")||time.includes("minute")){
             $(toggle).button('toggle');
         }
     }
