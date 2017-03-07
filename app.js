@@ -57,7 +57,7 @@ app.post('/api/newPost', function (req, res) {
 app.post('/api/deletePost', function (req, res) {
     var posts = JSON.parse(req.body.posts);
     console.log(posts);
-    if((req.get('Referrer')=="http://localhost:3000/admin".toLowerCase())){
+    if(req.get('Referrer').toLowerCase().includes("admin")){
         for (post of posts) {
             console.log(post)
             db.remove({ _id: post }, {});
