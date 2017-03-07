@@ -1,6 +1,13 @@
-<div class="card">
+<div class="card" id="<%= data._id %>">
     <div class="card-block">
-        <h4 class="card-title"><%= data.title %></h4>
+        <h4 class="card-title">
+            <%= data.title %>
+            <% if(admin){ %>
+            <button type="button" id="<%= data._id %>" class="btn btn-outline-danger delete-btn" data-toggle="button" aria-pressed="false" autocomplete="off">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+            <% } %>
+        </h4>
         <p class="card-text"><%- escape(data.post).replace(new RegExp('\r?\n','g'), ' <br/> '); %></p>
         <p class="card-text"><small class="text-muted"><%= getTimeDiff(new Date(data.time)) %></small></p>
     </div>

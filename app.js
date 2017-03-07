@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var admin = require('./routes/admin');
 var Datastore = require('nedb');
 db = new Datastore({ filename: 'db.json', autoload: true });
 var auth = require('http-auth');
@@ -17,7 +17,7 @@ var basic = auth.basic({
 var app = express();
 
 //Comment out to disable .htpasswd authentication.
-app.use(auth.connect(basic));
+//app.use(auth.connect(basic));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/admin', admin);
 
 //basic validation for blank posts - to be improved/rewritten
 function validatePost(post){
@@ -54,6 +54,19 @@ app.post('/api/newPost', function (req, res) {
     res.status(204).end();
 });
 
+app.post('/api/deletePost', function (req, res) {
+    var posts = JSON.parse(req.body.posts);
+    console.log(posts);
+    if((req.get('Referrer')=="http://localhost:3000/admin".toLowerCase())){
+        for (post of posts) {
+            console.log(post)
+            db.remove({ _id: post }, {});
+        }
+        res.status(204).end();
+    }
+	//console.log(post);
+    res.status(401).end();
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

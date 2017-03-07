@@ -17,3 +17,16 @@
     text-align: center;
     padding-bottom: 20px;
 }
+
+.delete-btn{
+    float: right;
+}
+
+.delete-btn:focus{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.btn-outline-danger:hover {
+    color: #d9534f;
+    background-color: #fff;
+}
