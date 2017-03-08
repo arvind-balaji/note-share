@@ -1,6 +1,6 @@
 # Note-Share
 ## Description
-Site with basic posting functionality. Supports link and text posts. Data is stored onto a local database (using nedb).
+Site with basic posting functionality. Has a password protected admin panel for deleting posts. Supports link and text posts. Data is stored onto a local database (using nedb).
 
 ## Dependencies
 Make sure you have node and npm installed on your machine.
@@ -19,9 +19,10 @@ To run the project in production mode using 'forverjs', execute the following co
 
     npm run forever
 
-Create a users.htpasswd file and put at the project root. If you would rather disable authentication, comment out line 20 in app.js.
+Create a users.htpasswd and admin.htpasswd file and put them at the project root.
 
 Server runs on port 3000 by default.
+/admin goes to admin panel.
 
 ##  To-Do
 * basic markdown processing for text posts
