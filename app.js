@@ -7,10 +7,11 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
 var Datastore = require('nedb');
+var linkify = require('linkify-it')();
 db = new Datastore({ filename: 'db.json', autoload: true });
 var auth = require('http-auth');
 var basic = auth.basic({
-    realm: "Simon Area.",
+    realm: "Main",
     file: __dirname + "/users.htpasswd"
 });
 
@@ -40,9 +41,10 @@ function validatePost(post){
         return false;
     }
     if (post.type == "link"){
-        if(!post.post.trim()){
+        if(!post.post.trim() && linkify.test(post.post)){
             return false;
         }
+        post.post = linkify.match(post.post)[0].url;
     }
     return true;
 }
