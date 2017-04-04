@@ -1,5 +1,9 @@
+var CLOUDINARY_URL = "https://api.cloudinary.com/api/v1_1/blerb/upload";
+var CLOUDINARY_UPLOAD_PRESET = "wf7kurer";
+
+var data = {type:'', title:'', post:''}
+
 $("#newPost").submit(function(e) {
-    var data = {type:'', title:'', post:''}
     var formData = $("#newPost").serializeArray();
 
     if($('#text-tab').hasClass('active')){
@@ -10,6 +14,10 @@ $("#newPost").submit(function(e) {
         data.type = "link";
         data.title = $('#linkTitle').val();
         data.post = $('#linkPost').val();
+    }else if($('#image-tab').hasClass('active')){
+        data.type = "image";
+        data.title = $('#imageTitle').val();
+        // data.post
     }
 
     var url = "/api/newPost"; // the script where you handle the form input.
@@ -65,3 +73,54 @@ $('#applyDeletion').click(function() {
     console.log(toDelete);
     deletePosts(toDelete);
 });
+
+$('input[type="file"]').change(function(e){
+    var file = e.target.files[0];
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    $('#modalSubmit').prop('disabled', true)
+    $('#uploadProgress').show();
+    axios({
+        url: CLOUDINARY_URL,
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: formData
+    }).then(function(res) {
+        console.log(res.data.url);
+        $('#uploadProgress').hide();
+        $('#files').after("<span id=\"fileLabel\" class=\"badge badge-primary\">"+file.name+"</span>");
+        $('#modalSubmit').prop('disabled', false);
+        data.post = res.data.url;
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+function uploadImage(){
+    var url = "";
+    var file = $('input[type="file"]').prop('files')[0];
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    axios({
+        url: CLOUDINARY_URL,
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: formData
+    }).then(function(res) {
+        url = res.data.url;
+    }).catch(function(err) {
+        console.log(err);
+    });
+    $('#files').after("<span id=\"fileLabel\" class=\"badge badge-primary\">"+file.name+"</span>");
+    // for (var i = 0; i< e.target.files.length; i++) {
+    //     var name = e.target.files[i].name;
+    //     $('#files').after("<span class=\"badge badge-default\">"+name+"</span>")
+    //
+    // }
+    return url;
+}

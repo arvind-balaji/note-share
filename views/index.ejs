@@ -8,11 +8,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Note Share</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 
@@ -29,7 +28,7 @@
 
     <div class="container">
         <div class="alert alert-warning" role="warning">
-            <strong>Read Before Posting!</strong> Do not share answers here. Posting questions is allowed but directly sharing answers is not. Please use <a class="notice-link" href="http://pastebin.com">pastebin</a> for longer text posts.
+            <strong>Read Before Posting!</strong> Use with caution, this site is still being built and errors may occur. Please use <a class="notice-link" href="http://pastebin.com">pastebin</a> for longer text posts.
         </div>
         <!-- Example row of columns -->
         <div class="row">
@@ -65,9 +64,11 @@
                     data = posts[index];%>
                     <%if (data.type == "link") { %>
                         <%include partials/linkPost%>
-                    <% }else{ %>
+                    <% }else if (data.type == "text"){ %>
                         <%include partials/textPost%>
-                    <% } %>
+                    <% }else if (data.type == "image"){ %>
+                        <%include partials/imagePost%>
+                    <%}%>
                 <%}); %>
 
                 <p><a class="btn btn-secondary" href="#" role="button">Load More</a></p>
@@ -80,34 +81,21 @@
                 <div class="modal-content">
                     <form id="newPost" action="api/newPost" method="post" data-parsley-validate="">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <h4 class="modal-title" id="myModalLabel">New Post</h4>
                         </div>
                         <div class="modal-body">
-                            <div class="alert alert-danger" role="alert">
-                                <strong>Attention!</strong> Answers are NOT allowed. Posts that attempt to share answers will be deleted. Old posts have been edited accordingly.
-                            </div>
-                            <ul class="nav nav-pills" id="myTab" role="tablist">
+                            <ul class="nav nav-pills nav-justified " id="myTab" role="tablist">
                                 <li class="nav-item form-pill">
                                     <a class="nav-link active" id="text-tab" data-toggle="tab" href="#text" role="tab" aria-controls="home" aria-expanded="true">Text</a>
                                 </li>
                                 <li class="nav-item form-pill">
                                     <a class="nav-link" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="profile" aria-expanded="false">Link</a>
                                 </li>
+                                <li class="nav-item form-pill">
+                                    <a class="nav-link" id="image-tab" data-toggle="tab" href="#image" role="tab" aria-controls="profile" aria-expanded="false">Image</a>
+                                </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <div role="tabpanel" class="tab-pane active show" id="text" aria-labelledby="text-tab" aria-expanded="true">
-                                    <div class="form-group">
-                                        <label for="textTitle" class="form-control-label" required="">Title</label>
-                                        <input type="text" class="form-control" name="textTitle" id="textTitle">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="textPost" class="form-control-label">Post</label>
-                                        <textarea class="form-control" name="textPost" id="textPost"></textarea>
-                                    </div>
-                                </div>
                                 <div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab" aria-expanded="false">
                                     <div class="form-group">
                                         <label for="linkTitle" class="form-control-label">Title</label>
@@ -118,11 +106,39 @@
                                         <input class="form-control" name="linkPost" id="linkPost"></input>
                                     </div>
                                 </div>
+                                <div role="tabpanel" class="tab-pane active show" id="text" aria-labelledby="text-tab" aria-expanded="true">
+                                    <div class="form-group">
+                                        <label for="textTitle" class="form-control-label" required="">Title</label>
+                                        <input type="text" class="form-control" name="textTitle" id="textTitle">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="textPost" class="form-control-label">Post</label>
+                                        <textarea class="form-control" name="textPost" id="textPost"></textarea>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab" aria-expanded="false">
+                                    <div class="form-group">
+                                        <label for="imageTitle" class="form-control-label">Title</label>
+                                        <input type="text" class="form-control" name="imageTitle" required id="imageTitle">
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- <label for="imagePost" class="form-control-label">Image</label>
+                                        <input class="form-control" name="imagePost" id="imagePost"></input> -->
+                                        <label class="custom-file">
+                                            <input type="file" id="file" class="custom-file-input cloudinary-fileupload" data-cloudinary-field="image_id">
+                                            <span class="custom-file-control"></span>
+                                        </label>
+                                        <div class="progress" id="uploadProgress" style="display:none;">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                        </div>
+                                        <span id = 'files'></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit Post</button>
+                            <button type="submit" id="modalSubmit" class="btn btn-primary">Submit Post</button>
                         </div>
                     </form>
                 </div>
@@ -141,8 +157,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="javascripts/index.js"></script>
 
 </body>

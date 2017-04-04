@@ -42,9 +42,11 @@
                     data = posts[index];%>
                     <%if (data.type == "link") { %>
                         <%include partials/linkPost%>
-                    <% }else{ %>
+                    <% }else if (data.type == "text"){ %>
                         <%include partials/textPost%>
-                    <% } %>
+                    <% }else if (data.type == "image"){ %>
+                        <%include partials/imagePost%>
+                    <%}%>
                 <%}); %>
 
                 <p><a class="btn btn-secondary" href="#" role="button">Load More</a></p>

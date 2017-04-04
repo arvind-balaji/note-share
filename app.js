@@ -40,7 +40,7 @@ function validatePost(post){
     if(!post.title.trim()){
         return false;
     }
-    if (post.type == "link"){
+    if (post.type == "link" || post.type == "image" ){
         if(!post.post.trim() && linkify.test(post.post)){
             return false;
         }
@@ -51,7 +51,8 @@ function validatePost(post){
 //save new post to database
 app.post('/api/newPost', function (req, res) {
     var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
-	//console.log(post);
+
+	console.log(post);
     if(validatePost(post)){db.insert(post)};
     res.status(204).end();
 });

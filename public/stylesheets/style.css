@@ -30,3 +30,18 @@
     color: #d9534f;
     background-color: #fff;
 }
+
+.card {
+    margin-bottom: 10px;
+}
+.card-img {
+    width: 100%;
+}
+
+#uploadProgress {
+    margin-top: 10px;
+}
+
+#fileLabel {
+    width: 100%;
+}
