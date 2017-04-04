@@ -91,36 +91,11 @@ $('input[type="file"]').change(function(e){
     }).then(function(res) {
         console.log(res.data.url);
         $('#uploadProgress').hide();
-        $('#files').after("<span id=\"fileLabel\" class=\"badge badge-primary\">"+file.name+"</span>");
+        $('#files').html("<span id=\"fileLabel\" class=\"badge badge-primary\">"+file.name+"</span>");
         $('#modalSubmit').prop('disabled', false);
         data.post = res.data.url;
     }).catch(function(err) {
+        $('#files').html("<span id=\"fileLabel\" class=\"badge badge-danger\">An error occured.</span>");
         console.log(err);
     });
 });
-function uploadImage(){
-    var url = "";
-    var file = $('input[type="file"]').prop('files')[0];
-    var formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    axios({
-        url: CLOUDINARY_URL,
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: formData
-    }).then(function(res) {
-        url = res.data.url;
-    }).catch(function(err) {
-        console.log(err);
-    });
-    $('#files').after("<span id=\"fileLabel\" class=\"badge badge-primary\">"+file.name+"</span>");
-    // for (var i = 0; i< e.target.files.length; i++) {
-    //     var name = e.target.files[i].name;
-    //     $('#files').after("<span class=\"badge badge-default\">"+name+"</span>")
-    //
-    // }
-    return url;
-}
