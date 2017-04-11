@@ -79,7 +79,7 @@
         <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form id="newPost" action="api/newPost" method="post" data-parsley-validate="">
+                    <form id="newPost" action="api/newPost" method="post" name="newPost">
                         <div class="modal-header">
                             <h4 class="modal-title" id="myModalLabel">New Post</h4>
                         </div>
@@ -99,7 +99,7 @@
                                 <div class="tab-pane fade" id="link" role="tabpanel" aria-labelledby="link-tab" aria-expanded="false">
                                     <div class="form-group">
                                         <label for="linkTitle" class="form-control-label">Title</label>
-                                        <input type="text" class="form-control" name="linkTitle" required id="linkTitle">
+                                        <input type="text" class="form-control" name="linkTitle" id="linkTitle">
                                     </div>
                                     <div class="form-group">
                                         <label for="linkPost" class="form-control-label">Link</label>
@@ -108,7 +108,7 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane active show" id="text" aria-labelledby="text-tab" aria-expanded="true">
                                     <div class="form-group">
-                                        <label for="textTitle" class="form-control-label" required="">Title</label>
+                                        <label for="textTitle" class="form-control-label">Title</label>
                                         <input type="text" class="form-control" name="textTitle" id="textTitle">
                                     </div>
                                     <div class="form-group">
@@ -119,7 +119,7 @@
                                 <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab" aria-expanded="false">
                                     <div class="form-group">
                                         <label for="imageTitle" class="form-control-label">Title</label>
-                                        <input type="text" class="form-control" name="imageTitle" required id="imageTitle">
+                                        <input type="text" class="form-control" name="imageTitle" id="imageTitle">
                                     </div>
                                     <div class="form-group">
                                         <!-- <label for="imagePost" class="form-control-label">Image</label>

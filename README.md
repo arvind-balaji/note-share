@@ -25,9 +25,9 @@ Server runs on port 3000 by default.
 /admin goes to admin panel.
 
 ##  To-Do
+* ~~possibly add an image uploader?~~ DONE! (comit 7f3c007)
+* ~~sanitize links on link posts~~ DONE! (comit 2b46713)
 * basic markdown processing for text posts
 * direct link to posts - 'permalinks'
-* sanitize links on link posts
 * implement search
 * implement post sorting
-* possibly add an image uploader?
