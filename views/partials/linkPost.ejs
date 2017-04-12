@@ -1,4 +1,4 @@
-<div class="card" id="<%= data._id %>" onclick="location.href='?id=<%= data._id %>'">
+<div class="card" id="<%= data._id %>">
     <div class="card-block">
         <h4 class="card-title">
             <a href="<%= data.post %>"><%= data.title %></a>
@@ -8,6 +8,9 @@
             </button>
             <% } %>
         </h4>
-        <p class="card-text"><small class="text-muted"><%= getTimeDiff(new Date(data.time)) %></small></p>
+        <p class="card-text">
+            <small class="text-muted"><%= getTimeDiff(new Date(data.time)) %></small>
+            <small class="text-muted right"><a href="?id=<%= data._id %>">Permalink</a></small>
+        </p>
     </div>
 </div>

@@ -47,3 +47,13 @@
     width: 100%;
     margin-top: 10px;
 }
+
+.text-muted.right {
+    float: right;
+    margin-top: 3px;
+}
+
+.card-img.rounded {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
