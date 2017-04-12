@@ -9,12 +9,19 @@ var basic = auth.basic({
 
 /* GET home page. */
 router.get('/', auth.connect(basic), function(req, res, next) {
-    //var count = req.param('count');
     db = new Datastore({ filename: 'db.json', autoload: true });
-    db.find().sort({time:-1}).exec(function (err, posts) {
-        //console.log(posts);
-        res.render('index', {posts : posts});
-    });
+
+    if(req.query.id){
+        db.find({ _id: req.query.id }, function (err, post) {
+            res.render('single', {data : post[0]});
+        });
+    }else{
+        //var count = req.param('count');
+        db.find().sort({time:-1}).exec(function (err, posts) {
+            //console.log(posts);
+            res.render('index', {posts : posts});
+        });
+    }
 });
 
 module.exports = router;

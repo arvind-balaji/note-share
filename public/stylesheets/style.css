@@ -3,12 +3,13 @@
     border-radius: 0;
 }
 
-.btn-outline-secondary{
+#contribute {
     color: white;
     border-color: white;
 }
 
-.btn-outline-secondary:focus {
+#contribute:focus {
+    color: #FFF;
     background-color: rgba(0, 0, 0, 0);
 }
 

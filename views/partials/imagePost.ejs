@@ -1,4 +1,4 @@
-<div class="card" id="<%= data._id %>">
+<div class="card" id="<%= data._id %>" onclick="location.href='?id=<%= data._id %>'">
     <div class="card-block">
         <h4 class="card-title">
             <a href="<%= data.post %>"><%= data.title %></a>
@@ -9,7 +9,7 @@
             <% } %>
         </h4>
         <%compressedURL = "http://res.cloudinary.com/"+data.post.split("/")[3]+"/image/upload/q_20/"+data.post.split("/")[7]%>
-        <a href="<%= data.post %>"><img class="card-img" src="<%= compressedURL %>" alt="Card image cap"></a>
+        <a href="<%= data.post %>"><img class="card-img rounded" src="<%= compressedURL %>" alt="Card image cap"></a>
         <p class="card-text"><small class="text-muted"><%= getTimeDiff(new Date(data.time)) %></small></p>
     </div>
 </div>
