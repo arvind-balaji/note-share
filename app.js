@@ -6,8 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
+var search = require('./routes/search');
+
 var Datastore = require('nedb');
 var linkify = require('linkify-it')();
+var fuzzy = require('fuzzy');
 db = new Datastore({ filename: 'db.json', autoload: true });
 var auth = require('http-auth');
 var basic = auth.basic({
@@ -34,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/admin', admin);
+app.use('/search', search);
 
 //basic validation for blank posts - to be improved/rewritten
 function validatePost(post){
@@ -48,13 +52,13 @@ function validatePost(post){
     }
     return true;
 }
-//save new post to database
-app.post('/api/newPost', function (req, res) {
-    var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
-	//console.log(post);
-    if(validatePost(post)){db.insert(post)};
-    res.status(204).end();
-});
+// //save new post to database
+// app.post('/api/newPost', function (req, res) {
+//     var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
+// 	//console.log(post);
+//     if(validatePost(post)){db.insert(post)};
+//     res.status(204).end();
+// });
 
 app.post('/api/deletePost', function (req, res) {
     var posts = JSON.parse(req.body.posts);

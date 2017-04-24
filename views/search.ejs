@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Admin Panel</title>
+    <title>Note Share</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/style.css">
@@ -21,23 +21,27 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3 text-white">Admin Panel</h1>
+            <h1 class="display-3 text-white">Note Share</h1>
         </div>
     </div>
 
     <div class="container">
+        <div class="alert alert-info" role="info">
+            Search results for  <strong>"<%= data.str %>". <a class="notice-link" href="?">Click to return to main page.</a></strong>
+        </div>
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-xs-12 col-md-3 push-md-9 bd-sidebar">
                 <div class="sidebar-nav-fixed affix">
-                    <button type="button" id="selectAll" class="btn btn-secondary btn btn-block">Select All</button>
-                    <button type="button" id="selectTime" class="btn btn-secondary btn btn-block">Select Past Hour</button>
-                    <button type="button" id="applyDeletion" class="btn btn-danger btn btn-block">Apply Actions</button>
-                    <br/>
+                    <div class="hidden-sm-down">
+                        <h3>Sidebar</h3>
+                        <p>Hella cool side bar content that I don't have time to write.</p>
+                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12 col-md-9 pull-md-3 bd-content">
-                <% admin = true; %>
+                <% admin = false; %>
                 <% posts.forEach(function(el, index) {
                     data = posts[index];%>
                     <%if (data.type == "link") { %>
@@ -48,8 +52,6 @@
                         <%include partials/imagePost%>
                     <%}%>
                 <%}); %>
-
-                <p><a class="btn btn-secondary" href="#" role="button">Load More</a></p>
             </div>
         </div>
         <hr>

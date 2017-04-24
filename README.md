@@ -27,7 +27,7 @@ Server runs on port 3000 by default.
 ##  To-Do
 * ~~possibly add an image uploader?~~ DONE! (comit 7f3c007)
 * ~~sanitize links on link posts~~ DONE! (comit 2b46713)
+* ~~direct link to posts - 'permalinks'~~ DONE! (comit 64a72fe)
+* ~~implement search~~ DONE!
 * basic markdown processing for text posts
-* direct link to posts - 'permalinks'
-* implement search
 * implement post sorting

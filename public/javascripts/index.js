@@ -35,6 +35,12 @@ $("#newPost").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
     location.reload();
 });
+
+$("#search").submit(function(e) {
+    if ($('#search-input').val().length == 0){
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+    }
+});
 function deletePosts(x){
     var url = "/api/deletePost"; // the script where you handle the form input.
     var data = {'posts':JSON.stringify(x)};
