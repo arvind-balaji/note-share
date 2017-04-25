@@ -52,13 +52,13 @@ function validatePost(post){
     }
     return true;
 }
-// //save new post to database
-// app.post('/api/newPost', function (req, res) {
-//     var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
-// 	//console.log(post);
-//     if(validatePost(post)){db.insert(post)};
-//     res.status(204).end();
-// });
+//save new post to database
+app.post('/api/newPost', function (req, res) {
+    var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
+	//console.log(post);
+    if(validatePost(post)){db.insert(post)};
+    res.status(204).end();
+});
 
 app.post('/api/deletePost', function (req, res) {
     var posts = JSON.parse(req.body.posts);

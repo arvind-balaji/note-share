@@ -8,12 +8,10 @@ var basic = auth.basic({
     realm: "Login",
     file: __dirname + "/../users.htpasswd"
 });
-console.log("foo");
 
 /* GET home page. */
 router.get('/', auth.connect(basic), function(req, res, next) {
         //var count = req.param('count');
-        console.log("search");
         if(req.query.str && (req.query.str != "")){
             console.log(req.query.str);
             //db = new Datastore({ filename: 'db.json', autoload: true });

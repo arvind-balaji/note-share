@@ -30,4 +30,5 @@ Server runs on port 3000 by default.
 * ~~direct link to posts - 'permalinks'~~ DONE! (comit 64a72fe)
 * ~~implement search~~ DONE!
 * basic markdown processing for text posts
+* add tags to posts - separate by classes/categories
 * implement post sorting
