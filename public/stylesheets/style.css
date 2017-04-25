@@ -13,17 +13,17 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
-.form-pill{
+.form-pill {
     width: 49%;
     text-align: center;
     padding-bottom: 20px;
 }
 
-.delete-btn{
+.delete-btn {
     float: right;
 }
 
-.delete-btn:focus{
+.delete-btn:focus {
     background-color: rgba(0, 0, 0, 0);
 }
 
@@ -35,6 +35,7 @@
 .card {
     margin-bottom: 10px;
 }
+
 .card-img {
     width: 100%;
 }
@@ -56,4 +57,10 @@
 .card-img.rounded {
     margin-bottom: 5px;
     margin-top: 5px;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
