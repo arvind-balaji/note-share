@@ -3,6 +3,7 @@ var CLOUDINARY_UPLOAD_PRESET = "wf7kurer";
 
 var data = {type:'', title:'', post:''}
 
+//submit new post
 $("#newPost").submit(function(e) {
     var formData = $("#newPost").serializeArray();
 
@@ -25,7 +26,9 @@ $("#newPost").submit(function(e) {
         async:false,
         type: "POST",
         url: url,
-        data: data,
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
         success: function(data)
         {
            //alert(data);
@@ -36,6 +39,7 @@ $("#newPost").submit(function(e) {
     location.reload();
 });
 
+//stop blank searches
 $("#search").submit(function(e) {
     if ($('#search-input').val().length == 0){
         e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -80,32 +84,49 @@ $('#applyDeletion').click(function() {
     deletePosts(toDelete);
 });
 
+//upload files to cloudinary and set data.post
 $('input[type="file"]').change(function(e){
-    var file = e.target.files[0];
-    var formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    //var formData = new FormData();
+    //var file = e.target.files[0];
+    var files = [];
     $('#modalSubmit').prop('disabled', true)
     $('#uploadProgress').show();
-    axios({
-        url: CLOUDINARY_URL,
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: formData
-    }).then(function(res) {
-        console.log(res.data.url);
-        $('#uploadProgress').hide();
-        $('#files').html("<span id=\"fileLabel\" class=\"badge badge-primary\">"+file.name+"</span>");
-        $('#modalSubmit').prop('disabled', false);
-        data.post = res.data.url;
-    }).catch(function(err) {
-        $('#files').html("<span id=\"fileLabel\" class=\"badge badge-danger\">An error occured.</span>");
-        console.log(err);
-    });
-});
 
+    for (var i = 0; i < e.target.files.length; i++){
+        var file = e.target.files[i];
+        if (i > 5) {
+            break;
+        }
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        axios({
+            url: CLOUDINARY_URL,
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: formData
+        }).then(function(res) {
+            console.log(res.data.url);
+            $('#files').append("<span id=\"fileLabel\" class=\"badge badge-primary\">"+res.data.original_filename+"</span>");
+            //data.post = res.data.url;
+            files.push(res.data.url);
+            if(files.length = e.target.files.length){
+                $('#uploadProgress').hide();
+                data.post = files;
+                $('#modalSubmit').prop('disabled', false);
+            }
+        }).catch(function(err) {
+            $('#files').append("<span id=\"fileLabel\" class=\"badge badge-danger\">An error occured.</span>");
+            console.log(err);
+        });
+    }
+    //console.log(files)
+});
+$('#postModal').on('hidden.bs.modal', function (e) {
+    $('#files').empty()
+})
 particlesJS.load('particles-js', '/particles.json', function() {
   console.log('callback - particles.js config loaded');
 });

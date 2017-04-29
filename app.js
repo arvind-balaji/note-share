@@ -44,18 +44,22 @@ function validatePost(post){
     if(!post.title.trim()){
         return false;
     }
-    if (post.type == "link" || post.type == "image" ){
+    if (post.type == "link"){
         if(!post.post.trim() && linkify.test(post.post)){
             return false;
         }
         post.post = linkify.match(post.post)[0].url;
+    }
+    if (post.type == "image" ){
+        if(post.post.length < 1){
+            return false;
+        }
     }
     return true;
 }
 //save new post to database
 app.post('/api/newPost', function (req, res) {
     var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
-	//console.log(post);
     if(validatePost(post)){db.insert(post)};
     res.status(204).end();
 });

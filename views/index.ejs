@@ -123,13 +123,13 @@
                                 <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab" aria-expanded="false">
                                     <div class="form-group">
                                         <label for="imageTitle" class="form-control-label">Title</label>
-                                        <input type="text" class="form-control" name="imageTitle" id="imageTitle">
+                                        <input type="text" class="form-control"  name="imageTitle" id="imageTitle">
                                     </div>
                                     <div class="form-group">
                                         <!-- <label for="imagePost" class="form-control-label">Image</label>
                                         <input class="form-control" name="imagePost" id="imagePost"></input> -->
                                         <label class="custom-file">
-                                            <input type="file" id="file" class="custom-file-input cloudinary-fileupload" data-cloudinary-field="image_id">
+                                            <input type="file" id="file" accept="image/*" class="custom-file-input cloudinary-fileupload" multiple data-cloudinary-field="image_id">
                                             <span class="custom-file-control"></span>
                                         </label>
                                         <div class="progress" id="uploadProgress" style="display:none;">

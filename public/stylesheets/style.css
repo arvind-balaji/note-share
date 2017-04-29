@@ -2,65 +2,52 @@
     background-color: #563d7c;
     border-radius: 0;
 }
-
 #contribute {
     color: white;
     border-color: white;
 }
-
 #contribute:focus {
     color: #FFF;
     background-color: rgba(0, 0, 0, 0);
 }
-
 .form-pill {
     width: 49%;
     text-align: center;
     padding-bottom: 20px;
 }
-
 .delete-btn {
     float: right;
 }
-
 .delete-btn:focus {
     background-color: rgba(0, 0, 0, 0);
 }
-
 .btn-outline-danger:hover {
     color: #d9534f;
     background-color: #fff;
 }
-
 .card {
     margin-bottom: 10px;
 }
-
 .card-img {
     width: 100%;
+    height: 100%;
 }
-
 #uploadProgress {
     margin-top: 10px;
 }
-
 #fileLabel {
     width: 100%;
     margin-top: 10px;
 }
-
 .text-muted.right {
     float: right;
     margin-top: 3px;
 }
-
 .card-img.rounded {
     margin-bottom: 5px;
     margin-top: 5px;
 }
-
 #particles-js {
     position: fixed;
     width: 100%;
-    height: 100%;
 }
