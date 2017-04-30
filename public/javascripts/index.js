@@ -86,28 +86,32 @@ $('#applyDeletion').click(function() {
 
 //upload files to cloudinary and set data.post
 $('input[type="file"]').change(function(e){
-    //var formData = new FormData();
-    //var file = e.target.files[0];
     var files = [];
+    var promises = [];
+
     $('#modalSubmit').prop('disabled', true)
     $('#uploadProgress').show();
 
     for (var i = 0; i < e.target.files.length; i++){
-        var file = e.target.files[i];
         if (i > 5) {
+            alert("Maximum of 5 images.")
             break;
         }
+        var file = e.target.files[i];
         var formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        axios({
+
+        promises.push(axios({
             url: CLOUDINARY_URL,
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             data: formData
-        }).then(function(res) {
+        }))
+
+        /*.then(function(res) {
             console.log(res.data.url);
             $('#files').append("<span id=\"fileLabel\" class=\"badge badge-primary\">"+res.data.original_filename+"</span>");
             //data.post = res.data.url;
@@ -120,8 +124,22 @@ $('input[type="file"]').change(function(e){
         }).catch(function(err) {
             $('#files').append("<span id=\"fileLabel\" class=\"badge badge-danger\">An error occured.</span>");
             console.log(err);
-        });
+        });*/
     }
+
+
+    axios.all(promises).then(function(results) {
+        results.forEach(function(res, index) {
+            files.push(res.data.url)
+            $('#files').append("<span id=\"fileLabel\" class=\"badge badge-primary\">"+res.data.original_filename+"</span>");
+        })
+        $('#uploadProgress').hide();
+        $('#modalSubmit').prop('disabled', false);
+        data.post = files;
+    }).catch(function(err) {
+        $('#files').append("<span id=\"fileLabel\" class=\"badge badge-danger\">An error occured. Try Again.</span>");
+        console.log(err);
+    });
     //console.log(files)
 });
 $('#postModal').on('hidden.bs.modal', function (e) {

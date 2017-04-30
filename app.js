@@ -54,6 +54,11 @@ function validatePost(post){
         if(post.post.length < 1){
             return false;
         }
+        post.post.forEach(function(el, index){
+            if(!linkify.test(el)){
+                return false;
+            }
+        })
     }
     return true;
 }
