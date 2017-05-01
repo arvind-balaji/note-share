@@ -93,8 +93,10 @@ $('input[type="file"]').change(function(e){
     $('#uploadProgress').show();
 
     for (var i = 0; i < e.target.files.length; i++){
-        if (i > 5) {
-            alert("Maximum of 5 images.")
+        if (i > 4) {
+            //alert("Maximum of 5 images.")
+            $('#uploadProgress').hide();
+            $('#files').append("<span id=\"fileLabel\" class=\"badge badge-danger\">Error. Exceeded Maximum of 5 images.</span>");
             break;
         }
         var file = e.target.files[i];

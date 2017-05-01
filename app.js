@@ -58,6 +58,9 @@ function validatePost(post){
             if(!linkify.test(el)){
                 return false;
             }
+            if(index > 5){
+                return false;
+            }
         })
     }
     return true;
