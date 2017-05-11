@@ -1,75 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+<%include partials/head%>
 
-    <title>Note Share</title>
+    <body>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <a href="?"><h1 class="display-3 text-white">Note Share</h1></a>
+            </div>
+        </div>
 
-<body>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3 text-white">Note Share</h1>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="alert alert-info" role="info">
+            <!-- <div class="alert alert-info" role="info">
             You are currently viewing a single post. <strong><a class="notice-link" href="?">Click to return to main page.</a></strong>
-        </div>
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-xs-12 col-md-3 push-md-9 bd-sidebar">
-                <div class="sidebar-nav-fixed affix">
-                    <div class="hidden-sm-down">
-                        <h3>Sidebar</h3>
-                        <p>Hella cool side bar content that I don't have time to write.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div> -->
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-xs-12 col-md-3 push-md-9 bd-sidebar">
+                    <div class="sidebar-nav-fixed affix">
+                        <div class="hidden-sm-down">
+                            <h3>Sidebar</h3>
+                            <p>Hella cool side bar content that I don't have time to write.</p>
+                            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        </div>
                     </div>
                 </div>
+                <div class="col-xs-12 col-md-9 pull-md-3 bd-content">
+                    <% admin = false; %>
+                        <%if (data.type == "link") { %>
+                            <%include partials/linkPost%>
+                        <% }else if (data.type == "text"){ %>
+                            <%include partials/textPost%>
+                        <% }else if (data.type == "image"){ %>
+                            <%include partials/imagePost%>
+                        <%}%>
+                    <hr>
+                </div>
             </div>
-            <div class="col-xs-12 col-md-9 pull-md-3 bd-content">
-                <% admin = false; %>
-                <%if (data.type == "link") { %>
-                    <%include partials/linkPost%>
-                <% }else if (data.type == "text"){ %>
-                    <%include partials/textPost%>
-                <% }else if (data.type == "image"){ %>
-                    <%include partials/imagePost%>
-                <%}%>
+            <!-- </br> -->
+            <div class="row">
+                <div class="col-xs-12 col-md-9 bd-content">
+                    <h4 class="mb-3">Comments</h4>
+                    <form class="form-inline mb-3" id="newComment">
+                        <!-- <div class="form-group"> -->
+                        <div class="col-8 no-pad">
+                            <textarea class="form-control form-control" id="comment" rows="1" placeholder="Add a comment..."></textarea>
+                        </div>
+                        <div class="col-4 no-pad">
+                            <button type="submit" class="btn btn-primary" id="commentSubmit">Submit</button>
+                        </div>
+                        <!-- </div> -->
+                    </form>
+                    <% data.comments.forEach(function(comment, index) {%>
+                            <%include partials/comment%>
+                    <%}); %>
+
+                </div>
             </div>
+            <hr>
+
+            <footer>
+                <p>&copy; [Redacted] 2016</p>
+            </footer>
         </div>
-        <hr>
-
-        <footer>
-            <p>&copy; [Redacted] 2016</p>
-        </footer>
-    </div>
-    <!-- /container -->
+        <!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
+        <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.js"></script>
-    <script src="/javascripts/index.js"></script>
-    <script src="https://use.fontawesome.com/02b19f14a0.js"></script>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.2/parsley.js"></script>
+        <script src="/javascripts/index.js"></script>
+        <!-- <script src="https://use.fontawesome.com/02b19f14a0.js"></script> -->
 
-</body>
+    </body>
 
 </html>
 

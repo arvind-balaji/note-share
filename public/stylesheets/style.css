@@ -47,6 +47,32 @@
     margin-bottom: 5px;
     margin-top: 5px;
 }
+.card-outline-purple{
+    background-color: transparent;
+    border: 2px solid;
+    border-color: #563d7c;
+}
+.no-pad{
+    padding: 0;
+}
+.comment-box{
+    display: inline-block;
+    /*background-color: rgba(86, 61, 124, 0);
+    border-color: #563d7c;*/
+}
+.comment-text{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    /*color: #563d7c;*/
+}
+#comment{
+    width:100%;
+}
+#commentSubmit{
+    margin-left: 10px;
+}
 #particles-js {
     position: fixed;
     width: 100%;

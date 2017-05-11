@@ -45,6 +45,25 @@ $("#search").submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
     }
 });
+$("#newComment").submit(function(e) {
+    var data = {text:$('#comment').val(),id:$('.card').attr('id')}
+    var url = "/api/newComment"; // the script where you handle the form input.
+    $.ajax({
+        async:false,
+        type: "POST",
+        url: url,
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        success: function(data)
+        {
+           //alert(data);
+        }
+    });
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    location.reload();
+});
 function deletePosts(x){
     var url = "/api/deletePost"; // the script where you handle the form input.
     var data = {'posts':JSON.stringify(x)};
@@ -112,21 +131,6 @@ $('input[type="file"]').change(function(e){
             },
             data: formData
         }))
-
-        /*.then(function(res) {
-            console.log(res.data.url);
-            $('#files').append("<span id=\"fileLabel\" class=\"badge badge-primary\">"+res.data.original_filename+"</span>");
-            //data.post = res.data.url;
-            files.push(res.data.url);
-            if(files.length = e.target.files.length){
-                $('#uploadProgress').hide();
-                data.post = files;
-                $('#modalSubmit').prop('disabled', false);
-            }
-        }).catch(function(err) {
-            $('#files').append("<span id=\"fileLabel\" class=\"badge badge-danger\">An error occured.</span>");
-            console.log(err);
-        });*/
     }
 
 

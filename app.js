@@ -67,11 +67,25 @@ function validatePost(post){
 }
 //save new post to database
 app.post('/api/newPost', function (req, res) {
-    var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"time": + new Date()};
+    var post = {"type":req.body.type,"title":req.body.title,"post":req.body.post,"comments":[],"time": + new Date()};
     if(validatePost(post)){db.insert(post)};
     res.status(204).end();
 });
+//make new comment
+app.post('/api/newComment', function (req, res) {
+    var comment = {"text":req.body.text,"time": + new Date()};
 
+    if(req.body.text.trim()){
+        db.find({ _id: req.body.id }, function (err, post) {
+            var newArray = post[0].comments;
+            newArray.unshift(comment);
+            db.update({ _id: req.body.id }, { $set: { comments: newArray } }, {}, function () {
+            });
+        });
+
+    };
+    res.status(204).end();
+});
 app.post('/api/deletePost', function (req, res) {
     var posts = JSON.parse(req.body.posts);
     //console.log(posts);
