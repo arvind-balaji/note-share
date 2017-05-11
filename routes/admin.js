@@ -9,7 +9,7 @@ var basic = auth.basic({
 
 
 /* GET home page. */
-router.get('/', auth.connect(basic), function(req, res, next) {
+router.get('/', function(req, res, next) {
     //var count = req.param('count');
     db = new Datastore({ filename: 'db.json', autoload: true });
     db.find().sort({time:-1}).exec(function (err, posts) {

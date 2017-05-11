@@ -8,7 +8,7 @@ var basic = auth.basic({
 });
 
 /* GET home page. */
-router.get('/', auth.connect(basic), function(req, res, next) {
+router.get('/', function(req, res, next) {
     db = new Datastore({ filename: 'db.json', autoload: true });
 
     if(req.query.id){

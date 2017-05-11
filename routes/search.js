@@ -10,7 +10,7 @@ var basic = auth.basic({
 });
 
 /* GET home page. */
-router.get('/', auth.connect(basic), function(req, res, next) {
+router.get('/', function(req, res, next) {
         //var count = req.param('count');
         if(req.query.str && (req.query.str != "")){
             console.log(req.query.str);
